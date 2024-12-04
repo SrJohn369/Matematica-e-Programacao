@@ -135,10 +135,10 @@ def calculo_num_misto(num_misto: list):
     novo_dividendo = divisor * num_inteiro
     if operador == "+":
         novo_dividendo += dividendo
-        return novo_dividendo, divisor
+        return [novo_dividendo, divisor]
     elif operador == "-":
         novo_dividendo -= dividendo
-        return novo_dividendo, divisor
+        return [novo_dividendo, divisor]
 
 
 def soma_sub_fracoes(*args):
@@ -170,21 +170,47 @@ def soma_sub_fracoes(*args):
         elif operadores[i] == "-":
             numerador_result -= aux
     
-    return numerador_result, denominador_mmc
+    return [numerador_result, denominador_mmc]
 
+
+def mult_fracoes(*args):
+    # faz a separação dos dados denominando cada uma das lista
+    numeradores = []
+    denominadores = []
+    
+    for fracao in args:
+        for i, num in enumerate(fracao):
+            if i == 0:
+                numeradores.append(num)
+            elif i == 1: 
+                denominadores.append(num)
+    # multiplica as frações
+    result_denom = 1
+    result_numer = 1
+    for i in range(len(denominadores)):
+        result_denom *= denominadores[i]
+        result_numer *= numeradores[i]
+        
+    return [result_numer, result_denom]
+
+
+def divisao_fracoes(*args):
+    pass
+    
 
 if __name__ == "__main__":
+    ############################
     print("Comparando as frações 5/8 e 7/12")
     print(compara_fracao([5, 8], [7, 12]))
+    ############################
     print("\nCalculo da fração mista 3-4/6 e 4+25/3")
-    f_mista_1 = calculo_num_misto([3, "-", 4, 6])
-    f_mista_2 = calculo_num_misto([4, "+", 25, 3])
-    print(f"Result: 3-4/6 = {f_mista_1[0]}/{f_mista_1[1]}")
-    print(f"\nResult: 4+25/3 = {f_mista_2[0]}/{f_mista_2[1]}")
-    # soma_f = soma_sub_fracoes([3, 10, "+"],[5, 6])
-    # print(f"""
-    #       A soma das frações : 3/10+5/6 é {soma_f[0]}/{soma_f[1]} 
-    #       """)
-    expressao_1 = soma_sub_fracoes([3, 10, "+"], [5, 6, "-"], [3, 13])
-    print(f"O resultado da expressão: 3/10 + 5/6 + 3/13 é {expressao_1[0]}/{expressao_1[1]}")
-    
+    expressao_00 = calculo_num_misto([3, "-", 4, 6])
+    expressao_01 = calculo_num_misto([4, "+", 25, 3])
+    print(f"Result: 3-4/6 = {expressao_00[0]}/{expressao_00[1]}")
+    print(f"\nResult: 4+25/3 = {expressao_01[0]}/{expressao_01[1]}")
+    ############################
+    expressao_02 = soma_sub_fracoes([3, 10, "+"], [5, 6, "+"], [3, 13])
+    print(f"O resultado da expressão: 3/10 + 5/6 + 3/13 é {expressao_02[0]}/{expressao_02[1]}")
+    ############################
+    expressao_03 = mult_fracoes([3, 4], [5, 2])
+    print(f"O resultado da expressão 3/4*5/2 é {expressao_03[0]}/{expressao_03[1]}")
