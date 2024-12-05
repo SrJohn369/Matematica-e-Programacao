@@ -142,6 +142,22 @@ def calculo_num_misto(num_misto: list):
 
 
 def soma_sub_fracoes(*args):
+    """
+    Soma e subtrai frações fornecidas como argumentos.
+
+    Parâmetros:
+    *args : List[List[int]]
+        Um ou mais frações representadas como listas, onde cada lista contém:
+        - O numerador (int)
+        - O denominador (int)
+        - Um operador (str) que pode ser "+" ou "-" para indicar a operação.
+
+    Retorna:
+    List[float]
+        Uma lista contendo:
+        - O numerador resultante da operação.
+        - O denominador comum das frações.
+    """
     # faz a separação dos dados denominando cada uma das lista
     numeradores = []
     denominadores = []
@@ -174,6 +190,21 @@ def soma_sub_fracoes(*args):
 
 
 def mult_fracoes(*args):
+    """
+    Multiplica frações fornecidas como argumentos.
+
+    Parâmetros:
+    *args : List[List[int]]
+        Um ou mais frações representadas como listas, onde cada lista contém:
+        - O numerador (int)
+        - O denominador (int)
+
+    Retorna:
+    List[float]
+        Uma lista contendo:
+        - O numerador resultante da multiplicação.
+        - O denominador resultante da multiplicação.
+    """
     # faz a separação dos dados denominando cada uma das lista
     numeradores = []
     denominadores = []
@@ -194,8 +225,8 @@ def mult_fracoes(*args):
     return [result_numer, result_denom]
 
 
-def divisao_fracoes(*args):
-    pass
+def divisao_fracoes(fracao_1: list, fracao_2: list):
+    return mult_fracoes(fracao_1, [fracao_2[1], fracao_2[0]])
     
 
 if __name__ == "__main__":
@@ -214,3 +245,8 @@ if __name__ == "__main__":
     ############################
     expressao_03 = mult_fracoes([3, 4], [5, 2])
     print(f"O resultado da expressão 3/4*5/2 é {expressao_03[0]}/{expressao_03[1]}")
+    ############################
+    expressao_04 = divisao_fracoes([5, 6], [3, 4])
+    # ./. deve ser visto como a divisão de frações
+    print(f"O resultado da expressão 5/6./.3/4 é {expressao_04[0]}/{expressao_04[1]}")
+    
